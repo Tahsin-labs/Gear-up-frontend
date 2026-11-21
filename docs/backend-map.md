@@ -69,6 +69,9 @@ Generated from backend routes, controllers, validations, and Prisma models.
 - `GET /api/provider/gear/:id`
   - Auth: None (public view)
   - Response: `{ success: true, message: "Gear retrieved successfully", data: GearItem & { category, provider, reviews } }`
+- `GET /api/provider/gear/:id/availability`
+  - Auth: None (public check)
+  - Response: `{ success: true, message: "Gear availability fetched successfully", data: Array<{ startDate: string, endDate: string }> }`
 - `POST /api/provider/gear`
   - Auth: PROVIDER
   - Body: `{ name: string, description: string, brand: string, imageUrl: string, pricePerDay: number, stock: number, categoryId: string, specifications?: any }`

@@ -19,6 +19,14 @@ export function useGearById(id: string) {
   });
 }
 
+export function useGearAvailability(id: string) {
+  return useQuery({
+    queryKey: ["gear", id, "availability"],
+    queryFn: () => api.gear.getAvailability(id),
+    enabled: Boolean(id),
+  });
+}
+
 export function useCategories() {
   return useQuery({
     queryKey: ["categories"],

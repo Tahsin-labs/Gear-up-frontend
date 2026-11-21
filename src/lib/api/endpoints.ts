@@ -76,6 +76,11 @@ export const api = {
         params: params as Record<string, string | number | boolean | undefined>,
       }),
     getById: (id: string) => apiClient<ApiResponse<GearItem>>(`provider/gear/${id}`, { method: "GET" }),
+    getAvailability: (id: string) =>
+      apiClient<ApiResponse<{ startDate: string; endDate: string }[]>>(
+        `provider/gear/${id}/availability`,
+        { method: "GET" }
+      ),
     create: (payload: CreateGearPayload) =>
       apiClient<ApiResponse<GearItem>>("provider/gear", {
         method: "POST",
