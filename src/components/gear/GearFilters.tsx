@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCategories } from "@/hooks";
 import { Input } from "@/components/ui/input";
@@ -23,27 +23,7 @@ export function GearFilters() {
   const { data: categoryData } = useCategories();
   const categories = categoryData?.data || [];
 
-  // Sync state when URL params change
-  useEffect(() => {
-    setSearch(searchParams.get("search") || "");
-    setCategoryId(searchParams.get("categoryId") || "ALL");
-    setBrand(searchParams.get("brand") || "");
-    setMinPrice(searchParams.get("minPrice") || "");
-    setMaxPrice(searchParams.get("maxPrice") || "");
-  }, [searchParams]);
-
-  // Debounced search sync to URL
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      const currentParam = searchParams.get("search") || "";
-      if (search !== currentParam) {
-        applyFilters({ search });
-      }
-    }, 450);
-    return () => clearTimeout(timer);
-  }, [search]);
-
-  const applyFilters = (overrides: Record<string, string | undefined> = {}) => {
+  const applyFilters = useCallback((overrides: Record<string, string | undefined> = {}) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("page", "1"); // reset to page 1 on filter changes
 
@@ -65,7 +45,18 @@ export function GearFilters() {
     });
 
     router.push(`/gear?${params.toString()}`);
-  };
+  }, [search, categoryId, brand, minPrice, maxPrice, searchParams, router]);
+
+  // Debounced search sync to URL
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const currentParam = searchParams.get("search") || "";
+      if (search !== currentParam) {
+        applyFilters({ search });
+      }
+    }, 450);
+    return () => clearTimeout(timer);
+  }, [search, searchParams, applyFilters]);
 
   const handleReset = () => {
     setSearch("");

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { format } from "date-fns";
-import { Rental, RentalStatus } from "@/types";
+import { Rental } from "@/types";
 import { StatusBadge } from "@/components/shared/StatusBadge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import {

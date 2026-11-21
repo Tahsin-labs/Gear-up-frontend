@@ -7,8 +7,6 @@ import { cn } from "@/lib/utils";
 import {
   Package,
   CalendarCheck2,
-  CreditCard,
-  Settings,
   Users,
   Layers,
   ShoppingBag,

@@ -13,7 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Check, CheckCircle2, RotateCcw, X, Loader2 } from "lucide-react";
+import { Check, CheckCircle2, RotateCcw, X } from "lucide-react";
 import { useUpdateRentalStatus } from "@/hooks";
 
 interface ProviderOrdersTableProps {
