@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { AvailabilityDateFilter } from "@/components/gear/AvailabilityDateFilter";
 import { Search, RotateCcw } from "lucide-react";
 
 export function GearFilters() {
@@ -135,6 +136,9 @@ export function GearFilters() {
           className="h-9 text-sm"
         />
       </div>
+
+      {/* Date Filter */}
+      <AvailabilityDateFilter />
 
       {/* Price Range */}
       <div className="space-y-1.5">
