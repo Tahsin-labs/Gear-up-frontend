@@ -4,7 +4,8 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { GearItem } from "@/types";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { Switch } from "@/components/ui/switch";
 import {
   Table,
@@ -54,11 +55,9 @@ export function ProviderInventoryTable({ gearItems }: InventoryTableProps) {
     return (
       <div className="p-12 text-center border border-dashed rounded-xl space-y-3">
         <p className="text-sm text-muted-foreground">You haven&apos;t listed any gear items yet.</p>
-        <Button asChild size="sm">
-          <Link href="/dashboard/provider/new">
-            <Plus className="h-4 w-4 mr-1" /> List Your First Gear
-          </Link>
-        </Button>
+        <Link href="/dashboard/provider/new" className={cn(buttonVariants({ size: "sm" }))}>
+          <Plus className="h-4 w-4 mr-1" /> List Your First Gear
+        </Link>
       </div>
     );
   }
@@ -115,11 +114,12 @@ export function ProviderInventoryTable({ gearItems }: InventoryTableProps) {
                   />
                 </TableCell>
                 <TableCell className="text-right space-x-2">
-                  <Button asChild size="icon-sm" variant="ghost">
-                    <Link href={`/dashboard/provider/edit/${gear.id}`}>
-                      <Edit2 className="h-4 w-4" />
-                    </Link>
-                  </Button>
+                  <Link
+                    href={`/dashboard/provider/edit/${gear.id}`}
+                    className={cn(buttonVariants({ size: "icon-sm", variant: "ghost" }))}
+                  >
+                    <Edit2 className="h-4 w-4" />
+                  </Link>
                   <Button
                     size="icon-sm"
                     variant="ghost"

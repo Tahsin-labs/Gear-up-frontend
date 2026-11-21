@@ -4,7 +4,8 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { GearItem } from "@/types";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import {
   Table,
   TableBody,
@@ -92,11 +93,13 @@ export function AdminGearTable({ gearItems }: AdminGearTableProps) {
                   {item.stock}
                 </TableCell>
                 <TableCell className="text-right space-x-1">
-                  <Button asChild size="icon-sm" variant="ghost">
-                    <Link href={`/gear/${item.id}`} target="_blank">
-                      <ExternalLink className="h-4 w-4" />
-                    </Link>
-                  </Button>
+                  <Link
+                    href={`/gear/${item.id}`}
+                    target="_blank"
+                    className={cn(buttonVariants({ size: "icon-sm", variant: "ghost" }))}
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                  </Link>
                   <Button
                     size="icon-sm"
                     variant="ghost"

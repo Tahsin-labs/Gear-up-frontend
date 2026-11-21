@@ -147,7 +147,7 @@ export function GearForm({
                 type="number"
                 step="0.01"
                 placeholder="45"
-                {...register("pricePerDay")}
+                {...register("pricePerDay", { valueAsNumber: true })}
               />
               {errors.pricePerDay && (
                 <p className="text-xs text-destructive">{errors.pricePerDay.message}</p>
@@ -161,7 +161,7 @@ export function GearForm({
                 id="stock"
                 type="number"
                 placeholder="1"
-                {...register("stock")}
+                {...register("stock", { valueAsNumber: true })}
               />
               {errors.stock && (
                 <p className="text-xs text-destructive">{errors.stock.message}</p>

@@ -11,7 +11,8 @@ import { ProviderStats } from "@/components/dashboard/ProviderStats";
 import { ProviderInventoryTable } from "@/components/dashboard/ProviderInventoryTable";
 import { ProviderOrdersTable } from "@/components/dashboard/ProviderOrdersTable";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Plus } from "lucide-react";
 
@@ -35,11 +36,9 @@ export default function ProviderDashboardPage() {
             title="Provider Portal"
             description="Manage your rental inventory, fulfill customer booking requests, and track returns."
           >
-            <Button asChild size="sm">
-              <Link href="/dashboard/provider/new">
-                <Plus className="h-4 w-4 mr-1" /> Add New Gear
-              </Link>
-            </Button>
+            <Link href="/dashboard/provider/new" className={cn(buttonVariants({ size: "sm" }))}>
+              <Plus className="h-4 w-4 mr-1" /> Add New Gear
+            </Link>
           </PageHeader>
 
           {loadingGear || loadingOrders ? (
