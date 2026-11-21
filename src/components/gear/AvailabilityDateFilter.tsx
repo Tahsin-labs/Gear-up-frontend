@@ -60,7 +60,6 @@ export function AvailabilityDateFilter({ onSelectRange }: DateFilterProps) {
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0" align="start">
           <Calendar
-            initialFocus
             mode="range"
             defaultMonth={date?.from || new Date()}
             selected={date}

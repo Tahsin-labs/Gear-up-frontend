@@ -127,7 +127,6 @@ export function RentalBookingCard({
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="end">
               <Calendar
-                initialFocus
                 mode="range"
                 defaultMonth={from || new Date()}
                 selected={dateRange}

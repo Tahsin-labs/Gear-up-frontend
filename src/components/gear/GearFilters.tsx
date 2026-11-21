@@ -106,8 +106,9 @@ export function GearFilters() {
         <Select
           value={categoryId}
           onValueChange={(val) => {
-            setCategoryId(val);
-            applyFilters({ categoryId: val === "ALL" ? "" : val });
+            const cleanVal = val || "ALL";
+            setCategoryId(cleanVal);
+            applyFilters({ categoryId: cleanVal === "ALL" ? "" : cleanVal });
           }}
         >
           <SelectTrigger className="h-9 text-sm">
