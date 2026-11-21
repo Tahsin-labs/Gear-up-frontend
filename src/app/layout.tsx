@@ -17,7 +17,13 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "GearUp | Rent Outdoor & Tech Gear",
-  description: "Peer-to-peer gear rental platform",
+  description: "Peer-to-peer equipment rental and sharing platform. Rent cameras, drones, camping equipment, and high-end tools securely.",
+  openGraph: {
+    title: "GearUp — Peer-to-Peer Gear Rental",
+    description: "Rent cameras, drones, camping equipment, and audio setups from trusted local providers.",
+    siteName: "GearUp",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
