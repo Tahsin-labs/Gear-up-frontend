@@ -10,6 +10,7 @@ import { GearCard } from "@/components/gear/GearCard";
 import { GearFilters } from "@/components/gear/GearFilters";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState } from "@/components/shared/EmptyState";
+import { GearPagination } from "@/components/gear/GearPagination";
 import { Compass } from "lucide-react";
 
 function GearList() {
@@ -55,11 +56,17 @@ function GearList() {
           icon={<Compass className="h-8 w-8 text-muted-foreground" />}
         />
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {gearItems.map((item) => (
-            <GearCard key={item.id} gear={item} />
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {gearItems.map((item) => (
+              <GearCard key={item.id} gear={item} />
+            ))}
+          </div>
+          <GearPagination
+            totalPages={data?.meta?.totalPages || 1}
+            currentPage={page}
+          />
+        </>
       )}
     </div>
   );
