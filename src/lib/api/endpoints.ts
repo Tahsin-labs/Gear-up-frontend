@@ -118,7 +118,7 @@ export const api = {
   // Payments
   payments: {
     create: (rentalId: string) =>
-      apiClient<ApiResponse<{ payment: Payment; gatewayUrl?: string }>>("customer/payments", {
+      apiClient<ApiResponse<{ payment?: Payment; gatewayUrl?: string; checkoutUrl?: string }>>("customer/payments", {
         method: "POST",
         body: JSON.stringify({ rentalId }),
       }),

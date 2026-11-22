@@ -79,8 +79,9 @@ export function useCreatePayment() {
     onSuccess: (res) => {
       queryClient.invalidateQueries({ queryKey: ["payments"] });
       queryClient.invalidateQueries({ queryKey: ["rentals"] });
-      if (res.data?.gatewayUrl) {
-        window.location.href = res.data.gatewayUrl;
+      const url = res.data?.checkoutUrl || res.data?.gatewayUrl;
+      if (url) {
+        window.location.href = url;
       }
     },
     onError: (err: { message?: string }) => {

@@ -15,8 +15,9 @@ export function usePayNow() {
       queryClient.invalidateQueries({ queryKey: ["payments"] });
       queryClient.invalidateQueries({ queryKey: ["rentals"] });
 
-      if (res.data?.gatewayUrl) {
-        window.location.href = res.data.gatewayUrl;
+      const url = res.data?.checkoutUrl || res.data?.gatewayUrl;
+      if (url) {
+        window.location.href = url;
       } else {
         toast.error("Gateway URL not provided by the payment service");
       }
