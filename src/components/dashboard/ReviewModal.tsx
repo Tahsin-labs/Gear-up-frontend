@@ -40,6 +40,7 @@ export function ReviewModal({ rental, onClose }: ReviewModalProps) {
     try {
       await api.reviews.create({
         rentalId: rental.id,
+        gearId: rental.gearId,
         rating,
         comment: comment.trim(),
       });

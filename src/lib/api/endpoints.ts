@@ -38,6 +38,7 @@ export interface CreateRentalPayload {
 
 export interface CreateReviewPayload {
   rentalId: string;
+  gearId: string;
   rating: number;
   comment: string;
 }
