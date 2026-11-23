@@ -54,8 +54,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const login = (newToken: string, newUser: User) => {
     setToken(newToken);
     setUser(newUser);
-    Cookies.set("token", newToken, { sameSite: "lax", expires: 7 });
-    Cookies.set("user", JSON.stringify(newUser), { sameSite: "lax", expires: 7 });
+    Cookies.set("token", newToken, { path: "/", sameSite: "lax", expires: 7 });
+    Cookies.set("user", JSON.stringify(newUser), { path: "/", sameSite: "lax", expires: 7 });
   };
 
   const logout = () => {

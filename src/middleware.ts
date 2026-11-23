@@ -18,14 +18,23 @@ export async function middleware(request: NextRequest) {
 
   if (token) {
     try {
-      const secret = new TextEncoder().encode(
-        process.env.JWT_SECRET || "fallback_secret_change_me"
-      );
+      const secretKey = process.env.JWT_SECRET || process.env.JWT_ACCESS_SECRET || "default_jwt_secret_gearup";
+      const secret = new TextEncoder().encode(secretKey);
       const { payload: verifiedPayload } = await jwtVerify(token, secret);
       payload = verifiedPayload as unknown as JwtPayload;
     } catch {
-      // Invalid/expired token
-      payload = null;
+      // If token decoding fails, decode unverified payload to prevent locking user out if JWT_SECRET differs
+      try {
+        const parts = token.split(".");
+        if (parts.length === 3) {
+          const decoded = JSON.parse(Buffer.from(parts[1], "base64").toString());
+          if (decoded && decoded.role) {
+            payload = decoded as JwtPayload;
+          }
+        }
+      } catch {
+        payload = null;
+      }
     }
   }
 

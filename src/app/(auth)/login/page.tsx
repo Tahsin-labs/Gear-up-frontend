@@ -32,7 +32,7 @@ export default function LoginPage() {
         login(res.data.accessToken, res.data.user);
         toast.success("Welcome back!");
         const role = res.data.user.role.toLowerCase();
-        router.push(`/dashboard/${role}`);
+        window.location.href = `/dashboard/${role}`;
       }
     } catch (err: unknown) {
       toast.error((err as { message?: string })?.message || "Failed to log in");
