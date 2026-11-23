@@ -123,11 +123,18 @@ export function CustomerOrdersTable({ rentals }: OrdersTableProps) {
                         size="sm"
                         onClick={() => payNowMutation.mutate(rental.id)}
                         disabled={payNowMutation.isPending}
-                        className="h-8 text-xs bg-purple-600 hover:bg-purple-700"
+                        className="h-8 text-xs bg-purple-600 hover:bg-purple-700 shadow-sm"
                       >
                         <CreditCard className="h-3.5 w-3.5 mr-1" />
                         {payNowMutation.isPending ? "Connecting..." : "Pay Now"}
                       </Button>
+                    )}
+
+                    {/* Pending Confirmation Notice for PENDING */}
+                    {isPlaced && (
+                      <span className="text-xs text-amber-600 bg-amber-50 dark:bg-amber-950/40 px-2 py-1 rounded border border-amber-200 inline-block text-left mr-2">
+                        Awaiting Provider Confirmation
+                      </span>
                     )}
 
                     {/* Cancel for PENDING / PLACED */}
