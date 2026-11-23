@@ -61,7 +61,7 @@ export const api = {
   // Categories
   categories: {
     getAll: () => apiClient<ApiResponse<Category[]>>("admin/categories", { method: "GET" }),
-    create: (payload: { name: string; description?: string }) =>
+    create: (payload: { name: string; slug?: string; description?: string }) =>
       apiClient<ApiResponse<Category>>("admin/categories", {
         method: "POST",
         body: JSON.stringify(payload),

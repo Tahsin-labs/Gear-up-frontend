@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useAuth } from "@/providers/auth-provider";
 import { useGear, useProviderOrders } from "@/hooks";
 import { Navbar } from "@/components/shared/Navbar";
@@ -17,6 +18,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Plus } from "lucide-react";
 
 export default function ProviderDashboardPage() {
+  const searchParams = useSearchParams();
+  const currentTab = searchParams.get("tab") || "inventory";
   const { user } = useAuth();
   const { data: gearData, isLoading: loadingGear } = useGear();
   const { data: ordersData, isLoading: loadingOrders } = useProviderOrders();
@@ -51,7 +54,7 @@ export default function ProviderDashboardPage() {
             <ProviderStats gearItems={myGear} orders={myOrders} />
           )}
 
-          <Tabs defaultValue="inventory" className="space-y-6">
+          <Tabs defaultValue={currentTab} key={currentTab} className="space-y-6">
             <TabsList>
               <TabsTrigger value="inventory">My Equipment Inventory</TabsTrigger>
               <TabsTrigger value="orders">

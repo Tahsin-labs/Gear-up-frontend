@@ -37,6 +37,7 @@ export interface User {
 export interface Category {
   id: string;
   name: string;
+  slug?: string | null;
   description?: string | null;
   createdAt?: string;
   updatedAt?: string;

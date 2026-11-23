@@ -29,14 +29,15 @@ export function DashboardSidebar() {
 
   const providerItems: SidebarItem[] = [
     { title: "My Gear Items", href: "/dashboard/provider", icon: Package },
-    { title: "Rental Orders", href: "/dashboard/provider/orders", icon: CalendarCheck2 },
+    { title: "Rental Orders", href: "/dashboard/provider?tab=orders", icon: CalendarCheck2 },
   ];
 
   const adminItems: SidebarItem[] = [
     { title: "Overview", href: "/dashboard/admin", icon: Layers },
-    { title: "Manage Users", href: "/dashboard/admin/users", icon: Users },
-    { title: "All Gear", href: "/dashboard/admin/gear", icon: Package },
-    { title: "All Rentals", href: "/dashboard/admin/rentals", icon: CalendarCheck2 },
+    { title: "Manage Users", href: "/dashboard/admin?tab=users", icon: Users },
+    { title: "All Gear", href: "/dashboard/admin?tab=gear", icon: Package },
+    { title: "All Rentals", href: "/dashboard/admin?tab=rentals", icon: CalendarCheck2 },
+    { title: "Categories", href: "/dashboard/admin?tab=categories", icon: Layers },
   ];
 
   let items = customerItems;

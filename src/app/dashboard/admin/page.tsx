@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/lib/api/endpoints";
 import { Navbar } from "@/components/shared/Navbar";
@@ -10,10 +11,13 @@ import { AdminStats } from "@/components/dashboard/AdminStats";
 import { AdminUsersTable } from "@/components/dashboard/AdminUsersTable";
 import { AdminGearTable } from "@/components/dashboard/AdminGearTable";
 import { AdminRentalsTable } from "@/components/dashboard/AdminRentalsTable";
+import { AdminCategoriesManager } from "@/components/dashboard/AdminCategoriesManager";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function AdminDashboardPage() {
+  const searchParams = useSearchParams();
+  const currentTab = searchParams.get("tab") || "users";
   const { data: usersData, isLoading: loadingUsers } = useQuery({
     queryKey: ["admin", "users"],
     queryFn: () => api.admin.getUsers(),
@@ -60,11 +64,12 @@ export default function AdminDashboardPage() {
             />
           )}
 
-          <Tabs defaultValue="users" className="space-y-6">
-            <TabsList>
+          <Tabs defaultValue={currentTab} key={currentTab} className="space-y-6">
+            <TabsList className="grid grid-cols-2 sm:grid-cols-4 w-full sm:w-auto h-auto">
               <TabsTrigger value="users">Users ({users.length})</TabsTrigger>
               <TabsTrigger value="gear">Platform Gear ({gear.length})</TabsTrigger>
               <TabsTrigger value="rentals">All Rentals ({rentals.length})</TabsTrigger>
+              <TabsTrigger value="categories">Categories</TabsTrigger>
             </TabsList>
 
             <TabsContent value="users">
@@ -77,6 +82,10 @@ export default function AdminDashboardPage() {
 
             <TabsContent value="rentals">
               <AdminRentalsTable rentals={rentals} />
+            </TabsContent>
+
+            <TabsContent value="categories">
+              <AdminCategoriesManager />
             </TabsContent>
           </Tabs>
         </main>
