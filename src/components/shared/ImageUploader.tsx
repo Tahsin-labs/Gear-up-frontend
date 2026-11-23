@@ -53,8 +53,8 @@ export function ImageUploader({
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
-  const handleAddUrl = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleAddUrl = (e?: React.MouseEvent | React.KeyboardEvent) => {
+    e?.preventDefault();
     if (!urlInput.trim()) return;
     if (!/^https?:\/\/.+/i.test(urlInput.trim())) {
       toast.error("Please enter a valid URL starting with http:// or https://");
@@ -113,21 +113,28 @@ export function ImageUploader({
       </div>
 
       {/* Paste URL directly */}
-      <form onSubmit={handleAddUrl} className="flex gap-2">
+      <div className="flex gap-2">
         <Input
           placeholder="Or paste an image URL directly..."
           value={urlInput}
           onChange={(e) => setUrlInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              handleAddUrl(e);
+            }
+          }}
           disabled={isUploading || value.length >= maxFiles}
         />
         <Button
-          type="submit"
+          type="button"
           variant="outline"
+          onClick={handleAddUrl}
           disabled={!urlInput.trim() || isUploading || value.length >= maxFiles}
         >
           <LinkIcon className="h-4 w-4 mr-1" /> Add
         </Button>
-      </form>
+      </div>
 
       {/* Preview thumbnails */}
       {value.length > 0 && (
