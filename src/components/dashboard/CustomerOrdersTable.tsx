@@ -117,8 +117,8 @@ export function CustomerOrdersTable({ rentals }: OrdersTableProps) {
                     <StatusBadge status={rental.status} />
                   </TableCell>
                   <TableCell className="text-right space-x-2">
-                    {/* Pay Now for CONFIRMED */}
-                    {isConfirmed && (
+                    {/* Pay Now for CONFIRMED or PENDING */}
+                    {(isConfirmed || isPlaced) && (
                       <Button
                         size="sm"
                         onClick={() => payNowMutation.mutate(rental.id)}
@@ -128,13 +128,6 @@ export function CustomerOrdersTable({ rentals }: OrdersTableProps) {
                         <CreditCard className="h-3.5 w-3.5 mr-1" />
                         {payNowMutation.isPending ? "Connecting..." : "Pay Now"}
                       </Button>
-                    )}
-
-                    {/* Pending Confirmation Notice for PENDING */}
-                    {isPlaced && (
-                      <span className="text-xs text-amber-600 bg-amber-50 dark:bg-amber-950/40 px-2 py-1 rounded border border-amber-200 inline-block text-left mr-2">
-                        Awaiting Provider Confirmation
-                      </span>
                     )}
 
                     {/* Cancel for PENDING / PLACED */}
