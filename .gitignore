@@ -39,6 +39,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-AGENTS.md
-API_INTEGRATION.md
-DEPLOPMENT.md
